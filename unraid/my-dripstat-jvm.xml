@@ -14,7 +14,7 @@
   <Category>Other: Utilities</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/JoeStratton/dripstat-jvm/main/unraid/dripstat-jvm.xml</TemplateURL>
-  <Icon/>
+  <Icon>https://miro.medium.com/v2/resize:fit:256/1*zVZG6d6ATbsmEDzi7NfpgQ.png<Icon/>
   <ExtraParams>--log-opt max-size=50m --log-opt max-file=1</ExtraParams>
   <PostArgs/>
   <CPUset/>

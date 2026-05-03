@@ -1,6 +1,6 @@
 # dripstat-jvm
 
-Tiny [Spring Boot](https://spring.io/projects/spring-boot) **4.1.x** (currently `4.1.0-M4` until `4.1.0` GA lands on Maven Central) on **Java 25**, meant to appear in [DripStat](https://dropstatgame.solant.me/). The workload is intentional no-op: Spring starts a normal application context while you size the heap with **`-Xmx`/`-Xms`** so the game can read heap capacity.
+Tiny [Spring Boot](https://spring.io/projects/spring-boot) **4.1.x** (currently `4.1.0-M4` until `4.1.0` GA lands on Maven Central) on **Java 25**, meant to appear in [DripStat](https://dropstatgame.solant.me/). The workload is intentional no-op: Spring starts a normal application context while you size the heap with **`-Xmx`/`-Xms`** so the game can read heap capacity. The process stays in the foreground until the container receives **SIGTERM** (otherwise a non‑web Boot app exits immediately after “Started”).
 
 - **Source:** [github.com/JoeStratton/dripstat-jvm](https://github.com/JoeStratton/dripstat-jvm)
 - **Image:** [hub.docker.com/r/j123ss/dripstat-jvm](https://hub.docker.com/r/j123ss/dripstat-jvm)
