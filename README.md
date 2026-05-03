@@ -33,7 +33,10 @@ Runtime image is **Eclipse Temurin 25 JRE on Alpine**; the build stage uses Mave
 
 ## CI and registry
 
-Pushes to **`main`** and version tags **`v*`** build multi-arch images (`linux/amd64`, `linux/arm64`) and push them to Docker Hub as **`j123ss/dripstat-jvm`**. Add repository **Actions** secret **`DOCKERHUB_TOKEN`** for account **`j123ss`** so the publish workflow can log in.
+Pushes to **`main`** and version tags **`v*`** build multi-arch images (`linux/amd64`, `linux/arm64`) and push to Docker Hub as **`${DOCKERHUB_USERNAME}/dripstat-jvm`** (same pattern as [quai-node-unofficial](https://github.com/JoeStratton/quai-node-unofficial)). Configure the GitHub repo:
+
+- **Variables → Actions:** `DOCKERHUB_USERNAME` (for example **`j123ss`**)
+- **Secrets → Actions:** **`DOCKERHUB_TOKEN`** — a Docker Hub [access token](https://hub.docker.com/settings/security) (or the account password); if this secret is missing or empty, login fails with *password required*.
 
 ## Unraid
 
