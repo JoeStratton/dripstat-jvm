@@ -2,6 +2,8 @@ package me.solant.dripstat;
 
 import java.util.concurrent.CountDownLatch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +14,8 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(proxyBeanMethods = false)
 public class DripstatApplication {
+
+  private static final Logger log = LoggerFactory.getLogger(DripstatApplication.class);
 
   public static void main(String[] args) {
     SpringApplication.run(DripstatApplication.class, args);
@@ -27,6 +31,9 @@ public class DripstatApplication {
       CountDownLatch stopped = new CountDownLatch(1);
       context.addApplicationListener(
           (ApplicationListener<ContextClosedEvent>) event -> stopped.countDown());
+      log.info(
+          "DripStat JVM is up and idle ({}); waiting for container stop (SIGTERM)",
+          Thread.currentThread().getName());
       try {
         stopped.await();
       } catch (InterruptedException e) {
