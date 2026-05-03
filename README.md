@@ -1,6 +1,9 @@
 # dripstat-jvm
 
-Tiny [Spring Boot](https://spring.io/projects/spring-boot) JVM image meant to appear in [DripStat](https://dropstatgame.solant.me/). The workload is intentional no-op: Spring starts a normal application context while you size the heap with **`-Xmx`/`-Xms`** so the game can read heap capacity.
+Tiny [Spring Boot](https://spring.io/projects/spring-boot) **4.1.x** (currently `4.1.0-M4` until `4.1.0` GA lands on Maven Central) on **Java 25**, meant to appear in [DripStat](https://dropstatgame.solant.me/). The workload is intentional no-op: Spring starts a normal application context while you size the heap with **`-Xmx`/`-Xms`** so the game can read heap capacity.
+
+- **Source:** [github.com/JoeStratton/dripstat-jvm](https://github.com/JoeStratton/dripstat-jvm)
+- **Image:** [hub.docker.com/r/j123ss/dripstat-jvm](https://hub.docker.com/r/j123ss/dripstat-jvm)
 
 ## Configure heap
 
@@ -13,23 +16,25 @@ Tiny [Spring Boot](https://spring.io/projects/spring-boot) JVM image meant to ap
 Example:
 
 ```bash
-docker run --rm -e HEAP_MB=1024 -e JVM_COUNT=3 dripstat-jvm
+docker run --rm -e HEAP_MB=1024 -e JVM_COUNT=3 j123ss/dripstat-jvm:latest
 ```
 
-## Multiple JVMs (Docker Compose)
+## Multiple JVMs
 
-Each replica is one container; scale for several processes with the same heap:
-
-```bash
-docker compose up -d --build --scale dripstat-jvm=5
-```
-
-Override heap in `docker-compose.yml` or with `environment:` on the service.
+Increase **`JVM_COUNT`** to run several Java processes in one container, or add more Unraid containers from the same template (each with its own heap settings).
 
 ## Build
 
 ```bash
-docker build -t dripstat-jvm .
+docker build -t j123ss/dripstat-jvm:local .
 ```
 
-Runtime image is **Eclipse Temurin 21 JRE on Alpine**; the build stage uses Maven and is discarded.
+Runtime image is **Eclipse Temurin 25 JRE on Alpine**; the build stage uses Maven and is discarded.
+
+## CI and registry
+
+Pushes to **`main`** and version tags **`v*`** build multi-arch images (`linux/amd64`, `linux/arm64`) and push them to Docker Hub as **`j123ss/dripstat-jvm`**. Add repository **Actions** secret **`DOCKERHUB_TOKEN`** for account **`j123ss`** so the publish workflow can log in.
+
+## Unraid
+
+Use the template URL: [raw.githubusercontent.com/JoeStratton/dripstat-jvm/main/unraid/dripstat-jvm.xml](https://raw.githubusercontent.com/JoeStratton/dripstat-jvm/main/unraid/dripstat-jvm.xml) in *Add Container* → *Install another application*, or import **`unraid/dripstat-jvm.xml`**. There is no Web UI; only environment variables apply.

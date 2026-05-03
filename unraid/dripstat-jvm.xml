@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>DripStat JVM</Name>
+  <Repository>j123ss/dripstat-jvm:latest</Repository>
+  <Registry>https://hub.docker.com/r/j123ss/dripstat-jvm</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/JoeStratton/dripstat-jvm/issues</Support>
+  <Project>https://github.com/JoeStratton/dripstat-jvm</Project>
+  <ReadMe>https://raw.githubusercontent.com/JoeStratton/dripstat-jvm/main/README.md</ReadMe>
+  <Overview>DripStat JVM (https://dropstatgame.solant.me/) &#x2014; headless Spring Boot 4.1.x on Java 25 so DripStat can see heap size and Spring beans. Image on Docker Hub (j123ss/dripstat-jvm). No Web UI.</Overview>
+  <Category>Other: Utilities</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/JoeStratton/dripstat-jvm/main/unraid/dripstat-jvm.xml</TemplateURL>
+  <Icon/>
+  <ExtraParams>--log-opt max-size=50m --log-opt max-file=1</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Heap size per JVM (MiB)" Target="HEAP_MB" Default="512" Mode="{3}" Description="Sets -Xmx and -Xms for each Spring Boot process." Type="Variable" Display="always" Required="true" Mask="false">512</Config>
+  <Config Name="JVM count (in container)" Target="JVM_COUNT" Default="1" Mode="{3}" Description="Number of separate java -jar processes inside this container (multiply memory needs roughly by this value)." Type="Variable" Display="always" Required="true" Mask="false">1</Config>
+  <Config Name="Extra JVM flags" Target="JAVA_OPTS" Default="" Mode="{3}" Description="Optional; appended before -jar (e.g. -XX:+UseContainerSupport)." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <TailscaleStateDir/>
+</Container>
