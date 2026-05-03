@@ -1,0 +1,10 @@
+services:
+  dripstat-jvm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      HEAP_MB: "512"
+      JVM_COUNT: "1"
+      JAVA_OPTS: ""
+    restart: unless-stopped
